@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios Combinados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5; /* Un color neutro para el fondo general */
+            display: flex;
+            flex-direction: column; /* Apila los contenedores verticalmente */
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            margin: 20px; /* Margen para los contenedores */
+            box-sizing: border-box;
+        }
+
+        /* Estilos para el formulario de Instalación Entidad (basado en la imagen 7) */
+        .window-container-entidad {
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 480px;
+            max-width: 90vw;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 30px; /* Espacio entre los dos formularios */
+        }
+
+        .window-header-title-entidad {
+            background-color: #333333;
+            color: white;
+            padding: 2px 10px;
+            font-size: 0.8em;
+            text-align: left;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .main-header-entidad {
+            background-color: hsl(208, 58%, 48%);
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-content-entidad {
+            padding: 20px;
+        }
+
+        .form-group-entidad {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .form-group-entidad label {
+            width: 90px;
+            font-size: 0.9em;
+            color: #333;
+            padding-top: 8px;
+        }
+
+        .form-group-entidad .input-wrapper-entidad {
+            flex: 1;
+            position: relative;
+            /* No necesitamos el margen extra para el dropdown abierto aquí, ya que no estará activo */
+        }
+
+        .form-group-entidad select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200%20-13.6%20-6.4h-260.8a17.6%2017.6%200%200%200%20-13.6%206.4%2017.6%2017.6%200%200%200%200%2025.3l130.4%20128.9c5.4%205.3%2013.8%205.3%2019.2%200l130.4%20-128.9a17.6%2017.6%200%200%200%200%20-25.3z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 10px;
+            cursor: pointer;
+        }
+
+        .form-group-entidad input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+
+        .button-group-entidad {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            background-color: #f0f0f0;
+        }
+
+        .button-group-entidad button {
+            padding: 8px 25px;
+            border: 1px solid #a0a0a0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            background: linear-gradient(to bottom, #f0f0f0 50%, #e0e0e0 100%);
+            color: #333;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .button-group-entidad button:hover {
+            background: linear-gradient(to bottom, #e0e0e0 50%, #d0d0d0 100%);
+            border-color: #888888;
+        }
+
+        .button-group-entidad .ok-button {
+            background: linear-gradient(to bottom, #4a90e2 50%, #3182ce 100%);
+            color: white;
+            border-color: #2a6496;
+        }
+        .button-group-entidad .ok-button:hover {
+            background: linear-gradient(to bottom, #3182ce 50%, #2a6496 100%);
+            border-color: #1a4a6b;
+        }
+
+
+        /* Estilos para el formulario de Transferencia (basado en la imagen 1) */
+        .container-transferencia {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 90vw;
+            overflow: hidden;
+            border: 1px solid #ccc; /* Agregando un borde sutil */
+        }
+        .header-transferencia {
+            background-color: #2a6496;
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+        .form-content-transferencia {
+            padding: 20px;
+        }
+        .form-group-transferencia {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .form-group-transferencia label {
+            width: 150px;
+            font-size: 0.9em;
+            color: #333;
+        }
+        .form-group-transferencia input[type="text"],
+        .form-group-transferencia select {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .form-group-transferencia input[type="text"]:focus,
+        .form-group-transferencia select:focus {
+            border-color: #2a6496;
+            outline: none;
+            box-shadow: 0 0 5px rgba(42, 100, 150, 0.3);
+        }
+        .form-group-transferencia .highlighted-input {
+            background-color: #b0d4f1;
+            border-color: #2a6496;
+        }
+        .button-group-transferencia {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+        .button-group-transferencia button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+        .button-group-transferencia .accept-button {
+            background-color: #2a6496;
+            color: white;
+        }
+        .button-group-transferencia .accept-button:hover {
+            background-color: #1a4a6b;
+        }
+        .button-group-transferencia .cancel-button {
+            background-color: #d1d1d1;
+            color: #333;
+        }
+        .button-group-transferencia .cancel-button:hover {
+            background-color: #bbbbbb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Formulario de Instalación Entidad (Basado en la imagen 7) -->
+    <div class="window-container-entidad">
+        <div class="window-header-title-entidad">Entidades</div>
+        <div class="main-header-entidad">
+            INSTALACION ENTIDAD
+        </div>
+        <div class="form-content-entidad">
+            <div class="form-group-entidad">
+                <label for="entidad_combined">Entidad:</label>
+                <div class="input-wrapper-entidad">
+                    <select id="entidad_combined">
+                        <option value="0006 Vicepresidencia del Estado Plurinacional">0006 Vicepresidencia del Estado Plurinacional</option>
+                        <option value="0010 Ministerio de Relaciones Exteriores">0010 Ministerio de Relaciones Exteriores</option>
+                        <option value="0015 Ministerio de Gobierno">0015 Ministerio de Gobierno</option>
+                        <option value="0016 Ministerio de Educación">0016 Ministerio de Educación</option>
+                        <option value="0020 Ministerio de Defensa">0020 Ministerio de Defensa</option>
+                        <option value="0025 Ministerio de la Presidencia" selected>0025 Ministerio de la Presidencia</option>
+                        <option value="0030 Ministerio de Justicia">0030 Ministerio de Justicia</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group-entidad">
+                <label for="sigla_combined">Sigla:</label>
+                <input type="text" id="sigla_combined">
+            </div>
+            <div class="form-group-entidad">
+                <label for="institucion_combined">Institución:</label>
+                <input type="text" id="institucion_combined">
+            </div>
+        </div>
+        <div class="button-group-entidad">
+            <button class="ok-button">OK</button>
+            <button>Salir</button>
+        </div>
+    </div>
+
+    <!-- Formulario de Transferencia (Basado en la imagen 1) -->
+    <div class="container-transferencia">
+        <div class="header-transferencia">
+            TRANSFERENCIA
+        </div>
+        <div class="form-content-transferencia">
+            <div class="form-group-transferencia">
+                <label for="unidadActual_combined">Unidad Actual</label>
+                <input type="text" id="unidadActual_combined" value="0252 - Nivel Central" readonly>
+            </div>
+            <div class="form-group-transferencia">
+                <label for="oficinaActual_combined">Oficina Actual</label>
+                <input type="text" id="oficinaActual_combined" value="100 DIRECCION" readonly>
+            </div>
+            <div class="form-group-transferencia">
+                <label for="responsableActual_combined">Responsable Actual</label>
+                <input type="text" id="responsableActual_combined" value="DR. WALTER AGREDA CO" readonly>
+            </div>
+            <div class="form-group-transferencia">
+                <label for="nuevaUnidad_combined">Nueva Unidad</label>
+                <select id="nuevaUnidad_combined">
+                    <option value="Nivel Central" selected>Nivel Central</option>
+                </select>
+            </div>
+            <div class="form-group-transferencia">
+                <label for="nuevaOficina_combined">Nueva Oficina</label>
+                <select id="nuevaOficina_combined">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group-transferencia">
+                <label for="nuevoResponsable_combined">Nuevo Responsable</label>
+                <select id="nuevoResponsable_combined" class="highlighted-input">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group-transferencia">
+                <label for="auxiliar_combined">Auxiliar</label>
+                <input type="text" id="auxiliar_combined">
+            </div>
+        </div>
+        <div class="button-group-transferencia">
+            <button type="submit" class="accept-button">Aceptar</button>
+            <button type="button" class="cancel-button">Cancelar</button>
+        </div>
+    </div>
+</body>
+</html>
